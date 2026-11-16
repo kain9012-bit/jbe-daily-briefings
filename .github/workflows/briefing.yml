@@ -1,0 +1,94 @@
+name: Morning briefing
+
+on:
+  # 정시 발행의 주 경로: 외부 스케줄러(cron-job.org)가 07:20 KST에 이 이벤트를 호출한다.
+  # GitHub 예약 실행은 2~8시간씩 밀리므로(edu-news-alert에서 확인) 보조로만 둔다.
+  workflow_dispatch:
+    inputs:
+      briefing:
+        description: "briefing id (briefings/*.json)"
+        default: "edu_policy"
+        required: true
+      force:
+        description: "rebuild even if today's briefing exists (true/false)"
+        default: "false"
+        required: false
+  schedule:
+    # UTC Sun-Thu 22:10 = KST Mon-Fri 07:10 (밀려도 오늘 것이 없을 때만 만든다)
+    - cron: "10 22 * * 0-4"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      BRIEFING: ${{ github.event.inputs.briefing || 'edu_policy' }}
+      FORCE: ${{ github.event.inputs.force || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check business day and today's file
+        id: gate
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import os, sys
+          sys.path.insert(0, "scripts")
+          from common import now_kst, is_business_day, PUBLIC_DIR
+          today = now_kst().date()
+          exists = (PUBLIC_DIR / os.environ["BRIEFING"] / f"{today}.json").exists()
+          run = is_business_day(today) and (not exists or os.environ["FORCE"] == "true")
+          print(f"run={'true' if run else 'false'}")
+          print(f"today={today}")
+          PY
+
+      - name: Collect
+        if: steps.gate.outputs.run == 'true'
+        run: python scripts/collect.py --briefing "$BRIEFING"
+
+      - name: Select, write, verify
+        if: steps.gate.outputs.run == 'true'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+        run: python scripts/write_briefing.py --briefing "$BRIEFING"
+
+      - name: Verify again and build index
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          python scripts/verify.py --briefing "$BRIEFING" --date "${{ steps.gate.outputs.today }}"
+          python scripts/build_index.py
+
+      - name: Commit
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data public
+          git commit -m "briefing: $BRIEFING ${{ steps.gate.outputs.today }}" || echo "nothing to commit"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4

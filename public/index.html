@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아침 브리핑</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --blue-600: #256ef4; --blue-700: #0b50d0; --blue-50: #ecf2fe; --blue-100: #d8e5fd;
+    --slate-900: #1e2124; --slate-800: #33363d; --slate-700: #464c53; --slate-500: #6d7882;
+    --slate-300: #b1b8be; --slate-200: #cdd1d5; --slate-100: #e6e8ea; --slate-50: #f4f5f6;
+    --green-700: #1f6b3a; --green-50: #eaf6ec; --red-700: #bd2c0f; --red-50: #fdefec;
+    --line: #e5eaef;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Malgun Gothic", sans-serif;
+    font-size: 17px; letter-spacing: -0.02em; word-break: keep-all; line-height: 1.6;
+    color: var(--slate-800); background: #fff; -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--blue-600); color: #fff; }
+  :focus-visible { outline: 3px solid var(--blue-600); outline-offset: 2px; border-radius: 4px; }
+  .krds-skip { position: absolute; left: -9999px; top: 0; }
+  .krds-skip:focus { left: 8px; top: 8px; z-index: 100; background: var(--slate-900); color: #fff; padding: 8px 12px; border-radius: 6px; }
+  a { color: var(--blue-700); }
+
+  header { position: sticky; top: 0; z-index: 30; background: #fff; border-bottom: 1px solid var(--line); }
+  .notice { background: var(--slate-50); font-size: 13px; color: var(--slate-500); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  .notice .wrap { display: flex; justify-content: space-between; gap: 12px; padding-top: 6px; padding-bottom: 6px; }
+  .bar { display: flex; align-items: center; gap: 24px; min-height: 64px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  .logo { width: 36px; height: 36px; border-radius: 8px; background: var(--blue-600); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+  .brand b { font-size: 19px; }
+  .brand small { display: block; font-size: 12px; color: var(--slate-500); margin-top: -2px; }
+  [role=tablist] { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; align-self: stretch; }
+  [role=tab] { height: 100%; background: none; border: 0; border-bottom: 3px solid transparent; padding: 18px 2px 15px; font: inherit; font-weight: 700; font-size: 16px; color: var(--slate-500); cursor: pointer; }
+  [role=tab][aria-selected=true] { color: var(--blue-700); border-bottom-color: var(--blue-600); }
+
+  main { flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 24px 16px 120px; }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  h1 { font-size: 26px; line-height: 1.3; margin: 0; letter-spacing: -0.03em; }
+  .meta { font-size: 14px; color: var(--slate-500); margin: 4px 0 0; }
+  .nav { display: flex; gap: 6px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font: inherit; font-size: 15px; font-weight: 700; border-radius: 8px; padding: 9px 14px; cursor: pointer; text-decoration: none; }
+  .btn-sub { background: #fff; color: var(--slate-700); border: 1px solid var(--slate-300); }
+  .btn-sub:hover:not(:disabled) { border-color: var(--blue-600); color: var(--blue-700); }
+  .btn-sub:disabled { opacity: .4; cursor: default; }
+  .btn-main { background: var(--slate-900); color: #fff; border: 0; }
+  .btn-main:hover { background: var(--slate-800); }
+  .btn-copy { width: 100%; padding: 14px; font-size: 17px; }
+  select { font: inherit; font-size: 15px; padding: 8px 10px; border: 1px solid var(--slate-300); border-radius: 8px; background: #fff; }
+
+  .card { background: #fff; border: 1px solid var(--slate-200); border-radius: 10px; }
+  .copybar { margin: 16px 0; }
+  .text { padding: 22px 20px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 16px; line-height: 1.75; }
+  .text a { word-break: break-all; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 4px; border: 1px solid; font-size: 12px; font-weight: 700; }
+  .badge.green { color: var(--green-700); background: var(--green-50); border-color: #b9e0c3; }
+  .badge.slate { color: var(--slate-700); background: var(--slate-50); border-color: var(--slate-200); }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--slate-500); margin: 14px 2px 0; }
+  .state { padding: 40px 20px; text-align: center; }
+  .state .icon { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; background: var(--slate-50); display: grid; place-items: center; font-size: 26px; }
+  .state h2 { font-size: 18px; margin: 0 0 4px; }
+  .state p { margin: 0 0 16px; color: var(--slate-500); font-size: 15px; }
+  .state.error .icon { background: var(--red-50); }
+  .skeleton { height: 320px; background: linear-gradient(90deg, var(--slate-50), var(--slate-100), var(--slate-50)); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 10px; }
+  @keyframes shimmer { to { background-position: -200% 0; } }
+
+  .toast { position: fixed; left: 50%; bottom: 96px; transform: translateX(-50%); background: var(--slate-900); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; }
+  .toast.show { opacity: 1; }
+  .mobile-copy { display: none; }
+  @media (max-width: 640px) {
+    h1 { font-size: 22px; }
+    .copybar { display: none; }
+    .mobile-copy { display: block; position: fixed; left: 0; right: 0; bottom: 0; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); z-index: 40; }
+    .text { padding: 18px 16px; font-size: 15.5px; }
+    .notice .right { display: none; }
+  }
+  footer { background: var(--slate-900); color: #c4c8cc; font-size: 14px; margin-top: auto; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 28px; padding-bottom: 28px; }
+  footer b { color: #fff; display: block; margin-bottom: 4px; }
+  .totop { position: fixed; right: 16px; bottom: 84px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--slate-300); background: #fff; font-size: 18px; cursor: pointer; display: none; z-index: 35; }
+  .totop.show { display: block; }
+  @media (min-width: 641px) { .totop { bottom: 24px; } }
+</style>
+</head>
+<body>
+<a class="krds-skip" href="#container">본문 바로가기</a>
+<header>
+  <div class="notice"><div class="wrap"><span>비공식 · 언론 기사 자동 수집·요약</span><span class="right" id="asof"></span></div></div>
+  <div class="wrap bar">
+    <a class="brand" href="./"><span class="logo" aria-hidden="true">아</span><span><b>아침 브리핑</b><small>전북특별자치도교육청</small></span></a>
+    <ul role="tablist" id="tabs"></ul>
+  </div>
+</header>
+
+<main id="container">
+  <div class="head">
+    <div>
+      <h1 id="title">아침 브리핑</h1>
+      <p class="meta" id="meta"></p>
+    </div>
+    <div class="nav">
+      <button class="btn btn-sub" id="prev" type="button" aria-label="이전 날짜">‹ 이전</button>
+      <select id="dates" aria-label="날짜 선택"></select>
+      <button class="btn btn-sub" id="next" type="button" aria-label="다음 날짜">다음 ›</button>
+    </div>
+  </div>
+  <div id="body"><div class="skeleton" aria-label="불러오는 중"></div></div>
+</main>
+
+<div class="mobile-copy"><button class="btn btn-main btn-copy" type="button" data-copy disabled>카톡용 복사</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button class="totop" id="totop" type="button" aria-label="맨 위로">↑</button>
+
+<footer>
+  <div class="wrap">
+    <div><b>아침 브리핑</b>전국 언론 기사 자동 수집 후 AI 요약 · 원문 링크는 수집한 기사 주소만 사용</div>
+    <div><b>출처</b>구글 뉴스·빙 뉴스 검색 결과 및 각 언론사 기사</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = { kinds: [], kind: null, dates: [], date: null, text: "" };
+  const params = new URLSearchParams(location.search);
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const linkify = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+  const fmtTime = (iso) => { const d = new Date(iso); return `${d.getMonth() + 1}.${d.getDate()}. ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`; };
+
+  async function getJSON(url) {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`${res.status}`);
+    return res.json();
+  }
+
+  function setCopyEnabled(on) { document.querySelectorAll("[data-copy]").forEach((b) => (b.disabled = !on)); }
+
+  function showState(kind, title, desc, retry) {
+    setCopyEnabled(false);
+    $("body").innerHTML = `<div class="card state ${kind}"><div class="icon" aria-hidden="true">${kind === "error" ? "!" : "☕"}</div>
+      <h2>${title}</h2><p>${desc}</p>${retry ? '<button class="btn btn-sub" type="button" id="retry">다시 시도</button>' : ""}</div>`;
+    if (retry) $("retry").onclick = retry;
+  }
+
+  function updateUrl() {
+    const q = new URLSearchParams();
+    if (state.kind && state.kinds.length > 1) q.set("b", state.kind.id);
+    if (state.date && state.date !== state.dates[0]?.date) q.set("d", state.date);
+    history.replaceState(null, "", q.toString() ? `?${q}` : location.pathname);
+  }
+
+  function renderTabs() {
+    $("tabs").innerHTML = state.kinds.map((k) => `<li><button role="tab" type="button" data-id="${k.id}" aria-selected="${k.id === state.kind?.id}">${esc(k.title.replace(/ 브리핑$/, ""))}</button></li>`).join("");
+    $("tabs").querySelectorAll("[role=tab]").forEach((b) => (b.onclick = () => selectKind(b.dataset.id)));
+  }
+
+  function renderDates() {
+    $("dates").innerHTML = state.dates.map((d) => `<option value="${d.date}"${d.date === state.date ? " selected" : ""}>${d.dateLabel}</option>`).join("");
+    const i = state.dates.findIndex((d) => d.date === state.date);
+    $("prev").disabled = i < 0 || i >= state.dates.length - 1;
+    $("next").disabled = i <= 0;
+  }
+
+  async function loadBriefing() {
+    renderDates();
+    updateUrl();
+    $("body").innerHTML = '<div class="skeleton" aria-label="불러오는 중"></div>';
+    try {
+      const b = await getJSON(`briefings/${state.kind.id}/${state.date}.json`);
+      state.text = b.text;
+      $("title").textContent = b.title;
+      $("meta").textContent = `${b.dateLabel} · 기사 ${b.items.length}건`;
+      $("asof").textContent = `생성 ${fmtTime(b.generatedAt)}`;
+      const notes = (b.verify?.notes || []).map((n) => `<span class="badge slate">${esc(n)}</span>`).join(" ");
+      $("body").innerHTML = `
+        <div class="copybar"><button class="btn btn-main btn-copy" type="button" data-copy>카톡용 복사</button></div>
+        <div class="card text" id="text">${linkify(b.text)}</div>
+        <div class="facts">
+          <span class="badge green">검증 통과</span>${notes}
+          <span>수집 기간 ${fmtTime(b.window.start)} ~ ${fmtTime(b.window.end)} (${b.window.hours}시간)</span>
+          <span>기사 ${b.stats.unique}건 → 사안 ${b.stats.clusters}개 → 후보 ${b.stats.shortlisted}개 → 수록 ${b.stats.published}건</span>
+        </div>`;
+      document.querySelectorAll("[data-copy]").forEach((btn) => (btn.onclick = copy));
+      setCopyEnabled(true);
+    } catch (e) {
+      showState("error", "브리핑을 불러오지 못함", "잠시 뒤 다시 시도", loadBriefing);
+    }
+  }
+
+  async function selectKind(id) {
+    state.kind = state.kinds.find((k) => k.id === id) || state.kinds[0];
+    renderTabs();
+    $("title").textContent = state.kind.title;
+    if (!state.kind.latest) {
+      state.dates = []; renderDates(); $("meta").textContent = "";
+      return showState("", "아직 발행된 브리핑 없음", "평일 아침 자동 발행");
+    }
+    try {
+      state.dates = await getJSON(`briefings/${state.kind.id}/index.json`);
+    } catch (e) {
+      return showState("error", "날짜 목록을 불러오지 못함", "잠시 뒤 다시 시도", () => selectKind(id));
+    }
+    const wanted = params.get("d");
+    state.date = state.dates.some((d) => d.date === wanted) ? wanted : state.dates[0].date;
+    params.delete("d");
+    loadBriefing();
+  }
+
+  async function copy() {
+    let ok = false;
+    try { await navigator.clipboard.writeText(state.text); ok = true; } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = state.text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { ok = document.execCommand("copy"); } catch (_) { ok = false; }
+      ta.remove();
+    }
+    toast(ok ? "복사 완료 — 카톡에 붙여넣기" : "복사 실패 — 글을 길게 눌러 직접 복사");
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const t = $("toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  $("dates").onchange = (e) => { state.date = e.target.value; loadBriefing(); };
+  $("prev").onclick = () => { const i = state.dates.findIndex((d) => d.date === state.date); if (i < state.dates.length - 1) { state.date = state.dates[i + 1].date; loadBriefing(); } };
+  $("next").onclick = () => { const i = state.dates.findIndex((d) => d.date === state.date); if (i > 0) { state.date = state.dates[i - 1].date; loadBriefing(); } };
+  window.addEventListener("scroll", () => $("totop").classList.toggle("show", scrollY > 400), { passive: true });
+  $("totop").onclick = () => scrollTo({ top: 0 });
+
+  async function init() {
+    try {
+      state.kinds = await getJSON("briefings/index.json");
+    } catch (e) {
+      return showState("error", "브리핑 목록을 불러오지 못함", "잠시 뒤 다시 시도", init);
+    }
+    if (!state.kinds.length) return showState("", "아직 발행된 브리핑 없음", "평일 아침 자동 발행");
+    selectKind(params.get("b"));
+  }
+  init();
+})();
+</script>
+</body>
+</html>
