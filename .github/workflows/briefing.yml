@@ -1,7 +1,8 @@
 name: Morning briefing
 
 on:
-  # 정시 발행의 주 경로: 외부 스케줄러(cron-job.org)가 07:20 KST에 이 이벤트를 호출한다.
+  # 기사 마감은 07:00 KST 고정(briefings/*.json cutoff_hour). 실행 시각과 무관.
+  # 정시 발행의 주 경로: 외부 스케줄러(cron-job.org)가 07:05 KST에 이 이벤트를 호출한다.
   # GitHub 예약 실행은 2~8시간씩 밀리므로(edu-news-alert에서 확인) 보조로만 둔다.
   workflow_dispatch:
     inputs:
@@ -14,8 +15,8 @@ on:
         default: "false"
         required: false
   schedule:
-    # UTC Sun-Thu 22:10 = KST Mon-Fri 07:10 (밀려도 오늘 것이 없을 때만 만든다)
-    - cron: "10 22 * * 0-4"
+    # UTC Sun-Thu 22:15 = KST Mon-Fri 07:15 보조 (오늘 것이 없을 때만 만든다)
+    - cron: "15 22 * * 0-4"
 
 permissions:
   contents: write

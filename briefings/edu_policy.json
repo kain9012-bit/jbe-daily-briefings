@@ -2,6 +2,7 @@
   "id": "edu_policy",
   "title": "교육정책 동향 브리핑",
   "max_items": 5,
+  "cutoff_hour": 7,
   "shortlist": 12,
   "audience": "전북특별자치도교육청 본청 정책 담당자(부서 카톡방 공유용)",
   "focus_topics": [

@@ -177,9 +177,10 @@ def cluster(articles: list[dict[str, Any]], threshold: float = 0.45) -> list[lis
                 continue
             overlap = len(words & group_words)
             score = overlap / min(len(words), len(group_words))
+            # 대표 기사 낱말과만 비교한다. 묶을 때마다 낱말을 합치면 눈덩이처럼 커져
+            # 수능 관련 기사 50건이 한 사안으로 뭉쳤다(2026-11-16 시험).
             if overlap >= 2 and score >= threshold:
                 members.append(article)
-                group_words |= words
                 placed = True
                 break
         if not placed:
@@ -193,8 +194,8 @@ def main() -> int:
     args = parser.parse_args()
 
     config = load_config(args.briefing)
-    end = now_kst()
-    start, end = collection_window(end)
+    now = now_kst()
+    start, end = collection_window(now, int(config.get("cutoff_hour", 7)))
     hours = (end - start).total_seconds() / 3600
     days = max(1, math.ceil(hours / 24))
     print(f"[수집] {config['title']} 기간 {start:%m-%d %H:%M} ~ {end:%m-%d %H:%M} ({hours:.0f}시간)")
@@ -249,7 +250,7 @@ def main() -> int:
 
     payload = {
         "briefing": args.briefing,
-        "collectedAt": end.isoformat(timespec="minutes"),
+        "collectedAt": now.isoformat(timespec="minutes"),
         "window": {"start": start.isoformat(timespec="minutes"), "end": end.isoformat(timespec="minutes"), "hours": round(hours)},
         "stats": {
             "raw": len(raw),

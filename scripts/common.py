@@ -34,10 +34,16 @@ def previous_business_day(day: date) -> date:
     return cursor
 
 
-def collection_window(end: datetime) -> tuple[datetime, datetime]:
-    """직전 영업일 같은 시각부터 지금까지. 평일 24시간, 월요일 72시간, 연휴 뒤는 그만큼 더."""
-    start_day = previous_business_day(end.date())
-    start = datetime.combine(start_day, end.timetz())
+def collection_window(now: datetime, cutoff_hour: int = 7) -> tuple[datetime, datetime]:
+    """직전 영업일 마감 시각부터 오늘 마감 시각까지. 평일 24시간, 월요일 72시간, 연휴 뒤는 그만큼 더.
+
+    마감을 실행 시각이 아닌 고정 시각(기본 07:00)으로 둔다. 실행이 늦어져도 기간이 같고,
+    마감 뒤 기사는 다음 영업일 기간에 들어가므로 빠지는 기사가 없다.
+    마감 전에 돌리면(수동 시험) 지금까지로 자른다.
+    """
+    cutoff = now.replace(hour=cutoff_hour, minute=0, second=0, microsecond=0)
+    end = cutoff if now >= cutoff else now
+    start = datetime.combine(previous_business_day(now.date()), cutoff.timetz())
     return start, end
 
 

@@ -9,7 +9,7 @@ GPT 예약으로 받던 아침 브리핑을 옮긴 자체 파이프라인. 평�
 
 | 단계 | 파일 | AI 사용 | 내용 |
 |---|---|---|---|
-| 수집 | `scripts/collect.py` | 없음 | 구글·빙 뉴스 RSS, 직전 영업일 같은 시각부터(월요일 72시간, 연휴 뒤 그만큼 더), 제외 규칙, 중복 제거, 같은 사안 묶기 |
+| 수집 | `scripts/collect.py` | 없음 | 구글·빙 뉴스 RSS, 직전 영업일 07:00 ~ 오늘 07:00(월요일 72시간, 연휴 뒤 그만큼 더. 마감 시각은 설정 `cutoff_hour`), 제외 규칙, 중복 제거, 같은 사안 묶기 |
 | 선정 | `scripts/write_briefing.py` | OpenRouter | 사안 목록(제목·보도량)에서 후보 12개 |
 | 보강 | 〃 | 없음 | robots.txt 허용 언론사만 본문 발췌(근거용, 공개 안 함). 구글 중계 주소뿐인 사안은 같은 제목을 빙에서 찾아 원문 주소 확보 |
 | 작성 | 〃 | OpenRouter | 최대 5건, 내용만 JSON으로. **주소·언론사·날짜는 AI가 쓰지 않고 코드가 수집 자료에서 넣음** |
@@ -34,11 +34,11 @@ GPT 예약으로 받던 아침 브리핑을 옮긴 자체 파이프라인. 평�
 4. Actions → Morning briefing → Run workflow 로 첫 실행 확인
 5. 정시 발행용 외부 스케줄러(cron-job.org) — GitHub 예약 실행은 몇 시간씩 밀림
    - 토큰: GitHub → Settings → Developer settings → Fine-grained token, 이 저장소만, 권한 `Actions: Read and write`
-   - cron-job.org 작업: 평일 07:20 (Asia/Seoul), `POST https://api.github.com/repos/kain9012-bit/jbe-daily-briefings/actions/workflows/briefing.yml/dispatches`
+   - cron-job.org 작업: 평일 07:05 (Asia/Seoul), `POST https://api.github.com/repos/kain9012-bit/jbe-daily-briefings/actions/workflows/briefing.yml/dispatches`
    - 헤더: `Authorization: Bearer <토큰>`, `Accept: application/vnd.github+json`
    - 본문: `{"ref":"main","inputs":{"briefing":"edu_policy","force":"false"}}`
 
-예약 실행(07:10)도 보조로 걸려 있음. 그날 파일이 이미 있으면 아무것도 안 함.
+예약 실행(07:15)도 보조로 걸려 있음. 그날 파일이 이미 있으면 아무것도 안 함.
 
 ## 내 PC에서 시험
 
