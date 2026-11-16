@@ -63,10 +63,11 @@ def render_edu_policy(config: dict[str, Any], day: date, draft: dict[str, Any], 
     lines += ["🏷 키워드", " ".join(f"#{k.strip().lstrip('#').replace(' ', '')}" for k in draft["keywords"]), ""]
     lines += ["📈 정책 흐름", draft["policy_flow"].strip(), ""]
 
+    preferred = config["sources"].get("news", {}).get("preferred_publishers", [])
     used: list[dict[str, Any]] = []
     for index, item in enumerate(draft["items"]):
         cluster = clusters[item["cluster_id"]]
-        article = pick_article(cluster)
+        article = pick_article(cluster, preferred)
         stars = "⭐⭐⭐" if int(item["stars"]) >= 3 else "⭐⭐"
         lines.append(f"{stars} {CIRCLED[index]} {item['headline'].strip()}")
         lines.append(f"({article['publisher']}, {short_date(article['published'])})")

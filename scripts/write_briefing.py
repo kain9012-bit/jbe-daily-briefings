@@ -274,8 +274,9 @@ def edu_policy_instructions(config: dict[str, Any], day: date) -> list[str]:
         "- items: 기사별. cluster_id는 후보의 사안 ID 그대로. stars는 3(꼭 볼 것) 또는 2(참고).",
         "  headline: 사안을 한 줄로 다시 쓴 제목(30자 안팎, 기사 제목 복사 금지).",
         "  core: 기사 핵심 2~3개. 무엇이 언제 어떻게 바뀌는지 사실 위주.",
-        "  why: 왜 중요한가 1~2개. 시도교육청·학교 현장에 미치는 영향 중심.",
-        "- insights: 전북교육청 정책 담당자가 챙길 점 2~3개. 부서를 지정하거나 지시하는 말투 금지.",
+        f"  why: 왜 중요한가 1~2개. {config.get('why_focus', '시도교육청·학교 현장에 미치는 영향 중심')}.",
+        f"- insights: {config.get('insight_focus', '전북교육청 정책 담당자가 챙길 점')} 2~3개. 부서를 지정하거나 지시하는 말투 금지.",
+        "공식 보도자료([공식 기관명])가 있는 사안을 우선.",
         "",
         f"제외: {config['exclude_rules']}.",
     ]
