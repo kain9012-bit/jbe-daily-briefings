@@ -1,0 +1,112 @@
+{
+  "briefing": "ai_data",
+  "title": "AI·데이터 브리핑",
+  "date": "2026-11-17",
+  "dateLabel": "2026.11.17.(화)",
+  "window": {
+    "start": "2026-11-16T07:00+09:00",
+    "end": "2026-11-17T00:15+09:00",
+    "hours": 17
+  },
+  "generatedAt": "2026-11-17T00:18+09:00",
+  "model": "google/gemini-3.5-flash",
+  "usage": {
+    "requests": 2,
+    "prompt": 23762,
+    "completion": 8273,
+    "total": 32035
+  },
+  "stats": {
+    "raw": 713,
+    "official": 7,
+    "inWindow": 536,
+    "excludedByRule": 14,
+    "unique": 479,
+    "clusters": 304,
+    "failedQueries": 0,
+    "sources": {
+      "news": true,
+      "korea_kr": true,
+      "edu_news_alert": true
+    },
+    "shortlisted": 14,
+    "published": 7
+  },
+  "verify": {
+    "passed": true,
+    "notes": []
+  },
+  "items": [
+    {
+      "clusterId": "C003",
+      "title": "개인정보위, 중남미로 개인정보 보호 협력 네트워크 확대",
+      "publisher": "개인정보보호위원회",
+      "org": "개인정보보호위원회",
+      "kind": "official",
+      "published": "2026-11-16T12:00+09:00",
+      "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789398",
+      "relatedCount": 14
+    },
+    {
+      "clusterId": "C062",
+      "title": "경기도교육청, 디지털 수업 우수 사례 100선 발굴",
+      "publisher": "경기도교육청",
+      "org": "경기도교육청",
+      "kind": "official",
+      "published": "2026-11-16T12:00+09:00",
+      "url": "https://www.goe.go.kr/goe/na/ntt/selectNttInfo.do?nttSn=2381699&bbsId=1922&mi=10102",
+      "relatedCount": 1
+    },
+    {
+      "clusterId": "C011",
+      "title": "행정기관 이메일 300여개 계정에 비정상 접속…정부, 합동점검",
+      "publisher": "연합뉴스",
+      "org": "행정안전부",
+      "kind": "news",
+      "published": "2026-11-16T14:30+09:00",
+      "url": "https://www.yna.co.kr/view/AKR20261116087500530",
+      "relatedCount": 5
+    },
+    {
+      "clusterId": "C013",
+      "title": "충북교육청 'AI 교수학습 구축' 사업 시범 교육청 선정",
+      "publisher": "파이낸셜뉴스",
+      "org": "교육부",
+      "kind": "news",
+      "published": "2026-11-16T14:29+09:00",
+      "url": "https://www.fnnews.com/news/202611161328389268",
+      "relatedCount": 5
+    },
+    {
+      "clusterId": "C001",
+      "title": "[속보] 정부, 수능 스마트기기 반납·공공 와이파이 차단 추진",
+      "publisher": "진일보 | 전남일보",
+      "org": "정부",
+      "kind": "news",
+      "published": "2026-11-16T14:23+09:00",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBjM2VkQUtndW9tNzJtenVSRjE2OWNuRVQ0czlVZVhSR2dhQ2piWjVzTWhWcjlLUjN6LV85d1ZzMUVWVDF1Snoxb2FUUllzOFdJSGEwb0pBdTNkc1NrQWNmMjNDYTB2WDhveHR2X0F0OA?oc=5",
+      "relatedCount": 19
+    },
+    {
+      "clusterId": "C051",
+      "title": "조폐공사·한전 개인정보 유출…피해와 수습 모두 국민이 감당해야 하나",
+      "publisher": "스페셜경제",
+      "org": "한국조폐공사",
+      "kind": "news",
+      "published": "2026-11-16T08:00+09:00",
+      "url": "https://www.speconomy.com/news/articleView.html?idxno=420114",
+      "relatedCount": 2
+    },
+    {
+      "clusterId": "C064",
+      "title": "초등돌봄 검색·신청, 12월 1일부터 정부24 '온동네 돌봄' 한곳에서",
+      "publisher": "뉴스N연합",
+      "org": "정부",
+      "kind": "news",
+      "published": "2026-11-16T23:12+09:00",
+      "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE12dWFKSjFyRERhbUZTcndpTjBTekhQZS1ZM0tpR3psZTBLUzNhYUFKYmVhMHdYeVFBOHd5blJ4eTFaX05HWl9TYjFB?oc=5",
+      "relatedCount": 1
+    }
+  ],
+  "text": "AI·데이터 브리핑 2026.11.17.(화)\n\n1. 개인정보위, 중남미로 개인정보 보호 협력 네트워크 확대\n기관: 개인정보보호위원회\n게시일: 2026.11.16.\n핵심내용: 개인정보보호위원회가 브라질 국가데이터보호청과 개인정보 보호 협력 업무협약을 체결하여 중남미 지역으로 글로벌 협력 네트워크 및 조사·집행 공조 기반을 확대.\n전북교육청 시사점: 글로벌 개인정보 보호 기준 변화에 대응하여 교육청 내 개인정보 보호 정책 및 국외 위탁 서비스 보안성 검토 기준 강화.\n\n2. 경기도교육청, 디지털 수업 우수 사례 100선 발굴\n기관: 경기도교육청\n게시일: 2026.11.16.\n핵심내용: 경기도교육청이 학교 교육과정과 연계한 디지털 역량교육 우수 수업사례 100선을 선정하고, 2027년 1월에 사례집을 제작하여 학교 현장에 보급할 계획.\n전북교육청 시사점: 전북형 디지털 역량교육 활성화를 위해 우수 수업사례 발굴 공모전 도입 및 현장 보급 체계 마련.\n\n3. 행정기관 이메일 300여개 계정에 비정상 접속…정부, 합동점검\n기관: 행정안전부\n게시일: 2026.11.16.\n핵심내용: 일부 지방정부의 취약한 네트워크와 통합인증체계(SSO) 취약점을 악용한 해킹으로 행정업무용 이메일시스템 300여 개 계정에 비정상 접속이 발생하여 관계기관 합동점검 및 긴급 보안조치 실시.\n전북교육청 시사점: 교육청 통합인증체계(SSO) 및 연계 시스템의 보안 취약점을 정밀 점검하고 외부 비정상 접근 통제 시스템 재정비.\n\n4. 충북교육청 'AI 교수학습 구축' 사업 시범 교육청 선정\n기관: 교육부\n게시일: 2026.11.16.\n핵심내용: 교육부가 국가 차원의 AI 디지털 교수학습·분석 체계 구축을 위해 충북교육청 등 2곳을 시범 교육청으로 선정하고, 자체 교수학습 플랫폼과 교육부 공통 모듈 간 연계 환경 구축 및 시범 운영 추진.\n전북교육청 시사점: 교육부의 AI 디지털 교수학습 공통 모듈 개발 동향을 모니터링하고 향후 전북형 교수학습 플랫폼과의 연계 및 현장 적용 방안 선제적 마련.\n\n5. [속보] 정부, 수능 스마트기기 반납·공공 와이파이 차단 추진\n기관: 정부\n게시일: 2026.11.16.\n핵심내용: 정부가 수능 시험장에서 AI 기기 등을 악용한 부정행위를 방지하기 위해 시험장 내 공공 와이파이 차단 및 스마트기기 반납 등 철저한 대비책 마련을 추진.\n전북교육청 시사점: 각종 교육 평가 및 시험 환경에서 AI 기술 악용 부정행위를 원천 차단하기 위한 디지털 기기 통제 및 보안 가이드라인 수립.\n\n6. 조폐공사·한전 개인정보 유출…피해와 수습 모두 국민이 감당해야 하나\n기관: 한국조폐공사\n게시일: 2026.11.16.\n핵심내용: 한국조폐공사 모바일 지역사랑상품권 플랫폼에서 이용자 3,083명의 개인정보가 유출되어 긴급 보안 조치를 실시하고 침입 경로 조사를 진행 중.\n전북교육청 시사점: 교육청 운영 대민 플랫폼 및 모바일 서비스의 개인정보 관리 실태를 점검하고 유출 사고 발생 시 신속한 대응 및 피해 구제 절차 마련.\n\n7. 초등돌봄 검색·신청, 12월 1일부터 정부24 '온동네 돌봄' 한곳에서\n기관: 정부\n게시일: 2026.11.16.\n핵심내용: 정부가 12월 1일부터 정부24 '온동네 돌봄' 서비스를 통해 여러 기관에 분산되어 있던 초등돌봄 정보를 한곳에서 검색하고 신청할 수 있도록 통합 서비스를 제공.\n전북교육청 시사점: 교육청 돌봄 서비스 정보를 정부 통합 플랫폼과 원활히 연계하고 학부모의 편의성을 높이기 위한 데이터 연계 체계 정비.\n"
+}
