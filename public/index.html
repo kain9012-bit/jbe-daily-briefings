@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아침 브리핑</title>
 <meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root {
@@ -63,6 +64,14 @@
   .badge.green { color: var(--green-700); background: var(--green-50); border-color: #b9e0c3; }
   .badge.slate { color: var(--slate-700); background: var(--slate-50); border-color: var(--slate-200); }
   .facts { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--slate-500); margin: 14px 2px 0; }
+  .sources { margin-top: 28px; }
+  .sources h2 { font-size: 18px; margin: 0 0 8px; }
+  .sources h2 small { font-size: 13px; font-weight: 400; color: var(--slate-500); margin-left: 6px; }
+  .sources ol { margin: 0; padding-left: 22px; }
+  .sources li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .sources li a { font-weight: 600; text-decoration: none; }
+  .sources li a:hover { text-decoration: underline; }
+  .sources .by { display: block; font-size: 13px; color: var(--slate-500); margin-top: 2px; }
   .state { padding: 40px 20px; text-align: center; }
   .state .icon { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; background: var(--slate-50); display: grid; place-items: center; font-size: 26px; }
   .state h2 { font-size: 18px; margin: 0 0 4px; }
@@ -92,7 +101,7 @@
 <body>
 <a class="krds-skip" href="#container">본문 바로가기</a>
 <header>
-  <div class="notice"><div class="wrap"><span>비공식 · 언론 기사 자동 수집·요약</span><span class="right" id="asof"></span></div></div>
+  <div class="notice"><div class="wrap"><span>비공식 · 언론 기사·보도자료 자동 수집·요약</span><span class="right" id="asof"></span></div></div>
   <div class="wrap bar">
     <a class="brand" href="./"><span class="logo" aria-hidden="true">아</span><span><b>아침 브리핑</b><small>전북특별자치도교육청</small></span></a>
     <ul role="tablist" id="tabs"></ul>
@@ -121,7 +130,7 @@
 <footer>
   <div class="wrap">
     <div><b>아침 브리핑</b>전국 언론 기사 자동 수집 후 AI 요약 · 원문 링크는 수집한 기사 주소만 사용</div>
-    <div><b>출처</b>구글 뉴스·빙 뉴스 검색 결과 및 각 언론사 기사</div>
+    <div><b>출처</b>구글 뉴스·빙 뉴스 검색 결과, 각 언론사 기사, 정책브리핑(korea.kr)·교육부·시도교육청 보도자료</div>
   </div>
 </footer>
 
@@ -133,6 +142,7 @@
 
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const linkify = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+  const fmtDay = (iso) => { const d = new Date(iso); return `${d.getMonth() + 1}.${d.getDate()}.`; };
   const fmtTime = (iso) => { const d = new Date(iso); return `${d.getMonth() + 1}.${d.getDate()}. ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`; };
 
   async function getJSON(url) {
@@ -186,8 +196,13 @@
         <div class="facts">
           <span class="badge green">검증 통과</span>${notes}
           <span>수집 기간 ${fmtTime(b.window.start)} ~ ${fmtTime(b.window.end)} (${b.window.hours}시간)</span>
-          <span>기사 ${b.stats.unique}건 → 사안 ${b.stats.clusters}개 → 후보 ${b.stats.shortlisted}개 → 수록 ${b.stats.published}건</span>
-        </div>`;
+          <span>자료 ${b.stats.unique}건 → 사안 ${b.stats.clusters}개 → 후보 ${b.stats.shortlisted}개 → 수록 ${b.stats.published}건</span>
+        </div>
+        <section class="sources" aria-labelledby="src-title">
+          <h2 id="src-title">원문 <small>복사 내용에는 들어가지 않음</small></h2>
+          <ol>${b.items.map((it) => `<li><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>
+            <span class="by">${it.kind === "official" ? '<span class="badge green">공식</span> ' : ""}${esc(it.org || it.publisher)} · ${fmtDay(it.published)}${it.relatedCount > 1 ? ` · 관련 자료 ${it.relatedCount}건` : ""}</span></li>`).join("")}</ol>
+        </section>`;
       document.querySelectorAll("[data-copy]").forEach((btn) => (btn.onclick = copy));
       setCopyEnabled(true);
     } catch (e) {

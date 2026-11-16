@@ -13,8 +13,11 @@ from common import BRIEFING_DIR, PUBLIC_DIR, write_json
 
 def main() -> int:
     kinds = []
-    for config_path in sorted(BRIEFING_DIR.glob("*.json")):
-        config = json.loads(config_path.read_text(encoding="utf-8"))
+    configs = sorted(
+        (json.loads(p.read_text(encoding="utf-8")) for p in BRIEFING_DIR.glob("*.json")),
+        key=lambda c: c.get("order", 99),
+    )
+    for config in configs:
         folder = PUBLIC_DIR / config["id"]
         entries = []
         for path in sorted(folder.glob("????-??-??.json"), reverse=True):
